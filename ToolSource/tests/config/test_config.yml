@@ -1,0 +1,9 @@
+Branch: main
+GitHub: github_PAT
+IBM_Key: apiToken 
+IBM_Label: robot
+IBM_Tenant: kep
+IBM_Unit: testing
+Model: codellama:34b-instruct-q4_K_M
+ModelPath: somePath
+Repository: priv-robot-shop

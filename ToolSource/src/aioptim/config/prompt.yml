@@ -1,0 +1,65 @@
+code_generation: 'You are an expert at software engineering, specialising in performance
+  tuning. 
+  You will be provided with a functional code snippet in $LANGUAGE$ from a production 
+  codebase.
+  Your task is:
+  - Carefully read the and understand the code snippet.
+  - Rewrite the code to be more performant so it performs the same task more efficiently.
+  - Importantly, DO NOT CHANGE THE METHOD PARAMETERS. They must remain exactly the same.
+  - Check the optimised code and ensure it uses the exact same method signature as the code snippet. 
+  Assume you have limited visibility and can only see this code snippet taken from a much larger
+  codebase.Ensure the generated code is compatible with the existing codebase because the code you
+  generate will integrate back into the codebase.
+
+  When responding, output only the optimised code as a code block with:
+  - THE METHOD NAME: $SIGNATURE$. 
+  - THE SAME PARAMETERS
+
+  Rewriting the code involves:
+  1. Removing dead code
+  2. Removing dead loops
+  3. Simplifying redundant calculations
+  4. Optimising the use of data structures
+  5. Optimising the algorithms (Rewriting slow algorithms)
+  6. Removing redundant code
+
+  Code Snippet: $CODE$
+
+  DO NOT change identation levels.
+  DO NOT change the method name: $SIGNATURE$ .
+  DO NOT change the method parameters.
+  DO NOT give any descriptions or commentary.
+  KEEP the method decorators.
+  If changes would not result in a performance increase, return an empty response.
+  Please deliver the response in plain text without any Markdown or formatting. Provide the output as raw text.
+  If the returned code does not use the EXACT method name: $SIGNATURE$ , your answer will be considered incorrect.
+  '
+
+codejudge_analyse: 'You will be provided with a problem statement and a code snippet
+  that supposedly addresses the problem in $LANGUAGE$.
+  Your task is to determine if the code snippet broadly fulfills the functional requirements described
+  in the problem. 
+  Evaluation Steps:
+  1. Read the problem statement and identify the core functionalities of the implementation.
+  2. Read the code snippet and assess whether it covers these core functionalities.
+  3. Focus only on whether the code satisfies the core functionalities in a general sense.
+  Problem Statement: $PROBLEM$
+  Code Snippet: $CODE$
+  DO NOT provide a corrected version of the code.
+  DO NOT check the code quality or style.'
+  
+codejudge_summarise: 'You will be provided with an analysis result of a code snippet.
+  Analysis Result: $ANALYSIS$
+  If the analysis believes that the code snippet is correct, output: "Yes". Otherwise, output: "No".
+  If the result does not return either "Yes" or "No" your answer will be considered incorrect.'
+
+description_generation: 'You are an expert at understanding source code and reverse
+  engineering problem statements.
+  You will be provided with a functional code snippet in $LANGUAGE$.
+  Your task is to read the code snippet and generate a clear problem statement that
+  describes the intended functionality of the code implementation.
+  DO NOT describe redundant code, which does not make a difference to the functionality.
+  Code Snippet: $CODE$
+  Please deliver the response in plain text without any Markdown or formatting. Provide the output as raw text.
+  When responding, output ONLY a clear problem statement.
+  DO NOT output an explanation.'
