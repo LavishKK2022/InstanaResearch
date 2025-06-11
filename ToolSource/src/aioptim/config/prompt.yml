@@ -63,3 +63,28 @@ description_generation: 'You are an expert at understanding source code and reve
   Please deliver the response in plain text without any Markdown or formatting. Provide the output as raw text.
   When responding, output ONLY a clear problem statement.
   DO NOT output an explanation.'
+
+code_classify: 'You are an expert in computational complexity and software performance engineering. You will be provided with a functional code snippet taken from a production codebase. 
+  Your task is to classify the computational performance of the code as either "fast" or "slow". 
+  Classification Criteria:
+    - Base your judgment on the underlying algorithmic complexity and data structure efficiency.
+    - Focus on factors such as:
+    - Time complexity (e.g., linear vs quadratic vs exponential)
+    - Space complexity
+    - Choice and usage of data structures (e.g., hash maps vs lists for lookups)
+    - Recursion depth or unbounded loops
+    - Sorting or searching strategy efficiency
+  Ignore superficial inefficiencies such as formatting, naming, or micro-optimizations (e.g., constant factors, use of `+=` vs `= x + 1`).
+  Definitions:
+  - "fast" - The code uses optimal or near-optimal algorithms and data structures for the task it appears to be solving, with reasonable time and space complexity.
+  - "slow" - The code uses clearly inefficient algorithms or data structures that could be significantly improved in asymptotic performance.
+  Input:
+  Code Snippet: $CODE$
+  When responding, return ONLY one of the following:
+  - fast
+  - slow
+  DO NOT provide any explanations or commentary.
+  DO NOT describe the code.
+  DO NOT reformat or rewrite any part of the code.
+  Any output other than "fast" or "slow" will be considered incorrect.'
+  

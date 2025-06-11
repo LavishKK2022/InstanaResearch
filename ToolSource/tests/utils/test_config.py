@@ -109,7 +109,8 @@ def test_Prompt_validation():
             'code_generation': "",
             'codejudge_analyse': "",
             'codejudge_summarise': "",
-            'description_generation': ""
+            'description_generation': "",
+            'code_classify': ""
         }
         ):
             with pytest.raises(YAMLLoader.YAMLException):
@@ -120,7 +121,8 @@ def test_Prompt_validation():
             'code_generation': "test",
             'codejudge_analyse': "test",
             'codejudge_summarise': "test",
-            'description_generation': "test"
+            'description_generation': "test",
+            'code_classify': "test"
         }
         ):
             Prompt.validate()
@@ -204,5 +206,6 @@ def test_PromptKeys_get_keys():
         'code_generation',
         'codejudge_analyse',
         'codejudge_summarise',
-        'description_generation'
+        'description_generation',
+        'code_classify'
     }

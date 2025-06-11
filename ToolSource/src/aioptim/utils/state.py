@@ -14,6 +14,7 @@ from aioptim.services.instana import IBM
 from aioptim.services.generator import Generator
 from aioptim.services.processor import GithubProcessor
 from aioptim.services.classifier import Classifier
+from aioptim.services.AIclassifier import AIClassifier
 
 
 @dataclass
@@ -27,7 +28,7 @@ class State:
     ibm: IBM
     generator: Generator
     processor: GithubProcessor
-    classifier: Classifier
+    classifier: AIClassifier  # could use Classifier (HF)
     delay: int
     threshold: int
 

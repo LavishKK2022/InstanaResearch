@@ -12,12 +12,14 @@ import logging
 from prefect import flow, task
 from aioptim.utils.config import Config
 from aioptim.services.classifier import Classifier
+from aioptim.services.AIclassifier import AIClassifier
 from aioptim.services.generator import Generator
 from aioptim.services.processor import GithubProcessor
 from aioptim.utils.state import State
 from aioptim.services.instana import IBM
 from aioptim.utils.info import details, get_col
 from prefect.cache_policies import NO_CACHE
+
 
 @task(name="push-code", log_prints=True, cache_policy=NO_CACHE)
 def push_code(state):
@@ -35,6 +37,7 @@ def push_code(state):
                     and slow_method.generated_code):
                 state.processor.update_file(
                     slow_method, slow_method.generated_code)
+
 
 @task(name="generate-code", log_prints=True)
 def generate_code(state):
@@ -77,6 +80,7 @@ def generate_code(state):
             raise LookupError(
                 f"{state.generator.model} could not be found in Ollama")
 
+
 @task(name="get-slow-code", log_prints=True, cache_policy=NO_CACHE)
 def slow_code(state):
     """
@@ -91,6 +95,7 @@ def slow_code(state):
             state.slow_code_blocks = list(state.fault_line)
         elif len(state.fault_line) > 1:
             state.slow_code_blocks = state.classifier(*state.fault_line)
+
 
 @task(name="get-fault-line", log_prints=True)
 def fault_line(state):
@@ -113,6 +118,7 @@ def fault_line(state):
             endpoint_method = parser.endpoint(files, endpoint.label)
             state.fault_line.update(parser.parse_method_calls(endpoint_method))
 
+
 @task(name="get-slow-endpoints", log_prints=True)
 def endpoints(state):
     """
@@ -127,6 +133,7 @@ def endpoints(state):
         state.threshold,
         get_col("technology")
     )
+
 
 @flow(name="entry-point", log_prints=True)
 def service(state):
@@ -146,6 +153,7 @@ def service(state):
     except Exception as e:
         print(f"Error while running the service {e}...")
         exit(1)
+
 
 def schedule_service(
     delay,
@@ -188,7 +196,11 @@ def schedule_service(
                     contents[config.REPOSITORY.value],
                     contents[config.BRANCH.value]
                 ),
-                classifier=Classifier(),
+                classifier=AIClassifier(  # Could be Classifier()
+                    contents[config.MODEL.value],
+                    contents[config.MODEL_PATH.value],
+                    max_runs=3
+                ),
                 threshold=threshold,
                 delay=delay
             )

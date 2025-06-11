@@ -107,6 +107,7 @@ class Prompt(YAMLLoader):
         DES_GEN = "description_generation"
         CJ_ANALYSER = "codejudge_analyse"
         CJ_SUMMARISE = "codejudge_summarise"
+        CODE_CLASSIFY = "code_classify"
 
         @staticmethod
         def get_keys():
